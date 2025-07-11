@@ -1,0 +1,11 @@
+{
+    "baseUrl": "https://stage-driftinv2.altimetrik.com/",
+    "auth":
+    {
+        "username": "driftin.automation06@altimetrik.com",
+        "password": "AutomationUser@12358_"
+
+    },
+    "timeout": 5000,
+    "features": ["login", "checkout", "profile"]
+}
