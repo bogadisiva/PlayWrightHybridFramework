@@ -5,6 +5,13 @@ test.beforeEach(async ({ page }) => {
   await page.goto(loginData.baseUrl);
 });
 
+test.afterEach(async ({ page }) => {
+  page.close();
+  
+  console.log('Test completed');
+})
+
+
 test('01-Login Tests',async ({page}) => {
       await page.click('text=Altimetrik SSO');
         await page.fill('input[name="loginfmt"]', loginData.auth.username);
@@ -14,6 +21,7 @@ test('01-Login Tests',async ({page}) => {
       await page.fill('input[name="Password"]', loginData.auth.password);
       await page.click('text=Sign in');
       console.log('First login attempt completed');
+  
 });
 
 test('02-Login Tests',async ({page}) => {
