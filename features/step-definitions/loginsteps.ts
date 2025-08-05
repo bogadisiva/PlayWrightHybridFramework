@@ -2,6 +2,9 @@ import { Given, When } from '@cucumber/cucumber';
 import loginCreden from '../../config/config.json';
 import { CustomWorld } from '../support/world';
 import { Page } from 'playwright';
+import { test,expect } from '@playwright/test';
+
+
 
 Given('I open the login page', async function (this: CustomWorld) {
   const page: Page = this.page;
@@ -18,11 +21,12 @@ When('Enter the username and password', { timeout: 60000 }, async function (this
 
   console.log('Clicking Altimetrik SSO');
   await page.click('text=Altimetrik SSO');
+  
+  test.expect(page.locator('text=Next')).toBeVisible({ timeout: 60000 });
   console.log('Waiting for login input field to be visible');
   // await page.locator('input[name="loginfmt"]').waitFor({ state: 'visible', timeout: 60000 });
   console.log('Filling in username:', username);
   await page.fill('input[name="loginfmt"]', username);
-
   await page.click('text=Next');
   await page.locator('input[placeholder="Login ID"]').waitFor({ state: 'visible' });
    // Wait for the password field to appear
