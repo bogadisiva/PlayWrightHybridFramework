@@ -1,6 +1,7 @@
-import { Given, When } from '@cucumber/cucumber';
+import { Given, Then, When } from '@cucumber/cucumber';
 import loginCreden from '../../config/config.json';
 import { CustomWorld } from '../support/world';
+import { Util } from '../../utils/common';
 import { Page } from 'playwright';
 import { test,expect } from '@playwright/test';
 
@@ -35,3 +36,17 @@ When('Enter the username and password', { timeout: 60000 }, async function (this
   await page.locator('span[id="submitButton"]').click();
   await page.waitForTimeout(5000);
 });
+Then('Click on yes button while login',{ timeout: 60000 }, async function (this: CustomWorld) {
+  const page: Page = this.page;
+  await page.click('text=Yes', { timeout: 60000 });
+
+});
+
+Then('I should see the dashboard',{ timeout: 60000 }, async function (this: CustomWorld) {
+  const page: Page = this.page;
+  const util = new Util(page);
+  // Check if the dashboard is visible
+  const dashboardVisible=await util.waitAndCheckVisible('text=Dashboard', 60000);
+  console.log('Dashboard is visible:', dashboardVisible);
+});
+
